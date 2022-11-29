@@ -1,14 +1,9 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
-const emailRegExp = /^[a-zA-Z0-9_-]+@[a-zA-Z_-].+?.[a-zA-Z]{2,3}$/;
-/*Doesn't allow numbers in the domain name and doesn't allow for top level
-domains that are less than 2 or more than 3 letters (which is fine until they allow more).
-Doesn't handle multiple &quot;.&quot; in the domain (joe@abc.co.uk).*/
+const emailRegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
 const passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
-/* Password must be at least 6 characters, no more than 10 characters,
-and must include at least one upper case letter,
-one lower case letter, and one numeric digit.*/
 
 const userSchema = new Schema(
   {
