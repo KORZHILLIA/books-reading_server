@@ -30,7 +30,7 @@ const signup = async (req, res) => {
   const mail = {
     to: email,
     subject: "Books Reading signup conirmation",
-    html: `<a href="BASE_URL/api/auth/verify/${verificationToken}">Press to confirm registration</a>`,
+    html: `<a href="http://localhost:3000/api/auth/verify/${verificationToken}" target="_blank">Press to confirm registration</a>`,
   };
   await sendMail(mail);
   res.status(201).json({
