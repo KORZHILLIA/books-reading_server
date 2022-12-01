@@ -43,13 +43,18 @@ const signup = async (req, res) => {
 const verifyEmail = async (req, res) => {
   const { verificationToken } = req.params;
   const user = await findUserByToken(verificationToken);
+  console.log(user);
   if (!user) {
     throw createReqError(404, "User not found");
   }
-  const { isVerified } = await User.findByIdAndUpdate(user._id, {
-    isVerified: true,
-    verificationToken: "",
-  });
+  const { isVerified } = await User.findByIdAndUpdate(
+    user._id,
+    {
+      isVerified: true,
+      verificationToken: "",
+    },
+    { new: true }
+  );
   res.json({ isVerified });
 };
 
