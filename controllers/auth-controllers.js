@@ -46,11 +46,11 @@ const verifyEmail = async (req, res) => {
   if (!user) {
     throw createReqError(404, "User not found");
   }
-  await User.findByIdAndUpdate(user._id, {
+  const { isVerified } = await User.findByIdAndUpdate(user._id, {
     isVerified: true,
     verificationToken: "",
   });
-  res.json({ isVerified: user.isVerified });
+  res.json({ isVerified });
 };
 
 const resendVerifyEmail = async (req, res) => {
