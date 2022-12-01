@@ -29,7 +29,7 @@ const signup = async (req, res) => {
   });
   const mail = {
     to: email,
-    subject: "Books Reading signup conirmation",
+    subject: "Books Reading signup confirmation",
     html: `<a href="http://localhost:3000/api/auth/verify/${verificationToken}" target="_blank">Press to confirm registration</a>`,
   };
   await sendMail(mail);
@@ -50,7 +50,7 @@ const verifyEmail = async (req, res) => {
     isVerified: true,
     verificationToken: "",
   });
-  res.json({ message: "Verification successfull" });
+  res.json({ isVerified: user.isVerified });
 };
 
 const resendVerifyEmail = async (req, res) => {
