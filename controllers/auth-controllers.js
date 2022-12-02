@@ -82,13 +82,16 @@ const signin = async (req, res) => {
   if (!user) {
     throw createReqError(404, "No user with this email");
   }
+  if (!user.isVerified) {
+    throw createReqError(409, "Please, verify your email first");
+  }
   const isPasswordValid = await comparePassword(password, user.password);
   if (!isPasswordValid) {
     throw createReqError(401, "This password is invalid");
   }
   const token = generateToken(user._id);
   await User.findByIdAndUpdate(user._id, { token });
-  res.json({ name: user.name, email, token });
+  res.json({ name: user.name, email, isVerified: user.isVerified, token });
 };
 
 const getCurrent = async (req, res) => {
