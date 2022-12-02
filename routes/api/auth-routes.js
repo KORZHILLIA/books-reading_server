@@ -26,11 +26,7 @@ router.post(
   createTryCatchWrapper(authControllers.resendVerifyEmail)
 );
 
-router.post(
-  "/signin",
-  validateBody(schemas.loginUserSchema),
-  createTryCatchWrapper(authControllers.signin)
-);
+router.post("/signin", createTryCatchWrapper(authControllers.signin));
 
 router.get(
   "/current",
