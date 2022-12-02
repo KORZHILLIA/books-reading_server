@@ -88,7 +88,7 @@ const signin = async (req, res) => {
   }
   const token = generateToken(user._id);
   await User.findByIdAndUpdate(user._id, { token });
-  res.json({ email, token });
+  res.json({ name: user.name, email, token });
 };
 
 const getCurrent = async (req, res) => {
