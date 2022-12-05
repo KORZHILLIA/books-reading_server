@@ -34,7 +34,7 @@ router.get(
   createTryCatchWrapper(authControllers.getCurrent)
 );
 
-router.get(
+router.post(
   "/logout",
   authenticate,
   createTryCatchWrapper(authControllers.logout)
