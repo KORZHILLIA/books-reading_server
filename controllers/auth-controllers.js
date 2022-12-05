@@ -43,7 +43,6 @@ const signup = async (req, res) => {
 const verifyEmail = async (req, res) => {
   const { verificationToken } = req.params;
   const user = await findUserByToken(verificationToken);
-  console.log(user);
   if (!user) {
     throw createReqError(404, "User not found");
   }
@@ -95,8 +94,8 @@ const signin = async (req, res) => {
 };
 
 const getCurrent = async (req, res) => {
-  const { name, email, token } = req.user;
-  res.json({ name, email, token });
+  const { name, email, token, isVerified } = req.user;
+  res.json({ name, email, token, isVerified });
 };
 
 const logout = async (req, res) => {
