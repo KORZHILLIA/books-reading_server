@@ -94,8 +94,8 @@ const signin = async (req, res) => {
 };
 
 const getCurrent = async (req, res) => {
-  const { name, email, token, isVerified } = req.user;
-  res.json({ name, email, token, isVerified });
+  const { name, email, token, isVerified, books } = req.user;
+  res.json({ name, email, token, isVerified, books });
 };
 
 const logout = async (req, res) => {
