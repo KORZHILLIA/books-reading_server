@@ -1,8 +1,15 @@
 const {
   addNewBook,
+  getAllBooks,
   addBookToUser,
   removeBookFromUser,
 } = require("../services/book-service");
+
+const getAll = async (req, res) => {
+  const { _id } = req.user;
+  const books = await getAllBooks(_id);
+  res.json({ books });
+};
 
 const add = async (req, res) => {
   const { _id } = req.user;
@@ -18,4 +25,4 @@ const remove = async (req, res) => {
   res.json({ books });
 };
 
-module.exports = { add, remove };
+module.exports = { getAll, add, remove };

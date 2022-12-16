@@ -6,6 +6,11 @@ const addNewBook = async (book) => {
   return newBook;
 };
 
+const getAllBooks = async (userId) => {
+  const { books } = await User.findById(userId).populate("books");
+  return books;
+};
+
 const addBookToUser = async (userId, bookId) => {
   const user = await User.findByIdAndUpdate(
     userId,
@@ -26,4 +31,4 @@ const removeBookFromUser = async (userId, bookId) => {
   return user;
 };
 
-module.exports = { addNewBook, addBookToUser, removeBookFromUser };
+module.exports = { addNewBook, getAllBooks, addBookToUser, removeBookFromUser };

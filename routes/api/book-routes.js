@@ -9,6 +9,12 @@ const bookControllers = require("../../controllers/book-controllers");
 
 const router = express.Router();
 
+router.get(
+  "/getAll",
+  authenticate,
+  createTryCatchWrapper(bookControllers.getAll)
+);
+
 router.post(
   "/add",
   validateBody(schemas.addNewBookSchema),
