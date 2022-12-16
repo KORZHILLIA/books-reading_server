@@ -23,6 +23,7 @@ const addBookToUser = async (userId, bookId) => {
 };
 
 const removeBookFromUser = async (userId, bookId) => {
+  await Book.findByIdAndDelete(bookId);
   const user = await User.findByIdAndUpdate(
     userId,
     { $pull: { books: bookId } },
