@@ -22,6 +22,12 @@ router.post(
   createTryCatchWrapper(bookControllers.add)
 );
 
+router.post(
+  "/relocate/ftpr/:bookId",
+  authenticate,
+  createTryCatchWrapper(bookControllers.relocateToPresent)
+);
+
 router.delete(
   "/remove/:bookId",
   authenticate,

@@ -2,6 +2,7 @@ const {
   addNewBook,
   getAllBooks,
   addBookToUser,
+  changeBookStatus,
   removeBookFromUser,
 } = require("../services/book-service");
 
@@ -18,6 +19,13 @@ const add = async (req, res) => {
   res.status(201).json({ books });
 };
 
+const relocateToPresent = async (req, res) => {
+  const { _id } = req.user;
+  const { bookId } = req.params;
+  const { books } = await changeBookStatus(_id, bookId, "present");
+  res.json({ books });
+};
+
 const remove = async (req, res) => {
   const { _id } = req.user;
   const { bookId } = req.params;
@@ -25,4 +33,4 @@ const remove = async (req, res) => {
   res.json({ books });
 };
 
-module.exports = { getAll, add, remove };
+module.exports = { getAll, add, relocateToPresent, remove };

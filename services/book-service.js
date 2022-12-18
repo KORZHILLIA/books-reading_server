@@ -22,6 +22,12 @@ const addBookToUser = async (userId, bookId) => {
   return user;
 };
 
+const changeBookStatus = async (userId, bookId, status) => {
+  await Book.findByIdAndUpdate(bookId, { status });
+  const user = User.findById(userId).populate("books");
+  return user;
+};
+
 const removeBookFromUser = async (userId, bookId) => {
   await Book.findByIdAndDelete(bookId);
   const user = await User.findByIdAndUpdate(
@@ -32,4 +38,10 @@ const removeBookFromUser = async (userId, bookId) => {
   return user;
 };
 
-module.exports = { addNewBook, getAllBooks, addBookToUser, removeBookFromUser };
+module.exports = {
+  addNewBook,
+  getAllBooks,
+  addBookToUser,
+  changeBookStatus,
+  removeBookFromUser,
+};
