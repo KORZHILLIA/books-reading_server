@@ -29,7 +29,7 @@ router.post(
 );
 
 router.post(
-  "/relocate/fprtf/:bookId",
+  "/relocate/prtf/:bookId",
   authenticate,
   createTryCatchWrapper(bookControllers.relocateToFuture)
 );
