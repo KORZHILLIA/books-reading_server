@@ -28,6 +28,12 @@ router.post(
   createTryCatchWrapper(bookControllers.relocateToPresent)
 );
 
+router.post(
+  "/relocate/fprtf/:bookId",
+  authenticate,
+  createTryCatchWrapper(bookControllers.relocateToFuture)
+);
+
 router.delete(
   "/remove/:bookId",
   authenticate,

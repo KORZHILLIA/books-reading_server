@@ -26,6 +26,13 @@ const relocateToPresent = async (req, res) => {
   res.json({ books });
 };
 
+const relocateToFuture = async (req, res) => {
+  const { _id } = req.user;
+  const { bookId } = req.params;
+  const { books } = await changeBookStatus(_id, bookId, "future");
+  res.json({ books });
+};
+
 const remove = async (req, res) => {
   const { _id } = req.user;
   const { bookId } = req.params;
@@ -33,4 +40,4 @@ const remove = async (req, res) => {
   res.json({ books });
 };
 
-module.exports = { getAll, add, relocateToPresent, remove };
+module.exports = { getAll, add, relocateToPresent, relocateToFuture, remove };
