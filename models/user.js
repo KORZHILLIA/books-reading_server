@@ -36,6 +36,11 @@ const userSchema = new Schema(
       default: false,
     },
     books: [{ type: Schema.Types.ObjectId, ref: "Book" }],
+    training: {
+      type: Schema.Types.ObjectId,
+      ref: "Training",
+      default: null,
+    },
   },
   { versionKey: false, timestamps: true }
 );

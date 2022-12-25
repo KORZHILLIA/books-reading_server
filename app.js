@@ -6,12 +6,14 @@ const app = express();
 
 const authRouter = require("./routes/api/auth-routes");
 const booksRouter = require("./routes/api/book-routes");
+const trainingRouter = require("./routes/api/training-routes");
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
 app.use("/api/books", booksRouter);
+app.use("/api/training", trainingRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });
