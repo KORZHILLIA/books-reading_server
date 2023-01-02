@@ -27,6 +27,16 @@ const addTrainingToUser = async (userId, trainingData) => {
 const removeTrainingOfUser = async (userId) => {
   const user = await User.findById(userId);
   await Training.findByIdAndDelete(user.training);
+  user.books.forEach(async (id) => {
+    const { status } = await Book.findById(id);
+    if (status === "present") {
+      await Book.findByIdAndUpdate(id, { status: "future" });
+      return;
+    }
+    if (status === "past") {
+      await Book.findByIdAndDelete(id);
+    }
+  });
   const updatedUser = await User.findByIdAndUpdate(
     userId,
     { training: null },
