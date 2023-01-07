@@ -24,8 +24,8 @@ const add = async (req, res) => {
 
 const remove = async (req, res) => {
   const { _id } = req.user;
-  const { training } = await removeTrainingOfUser(_id);
-  res.json({ training });
+  const { books, training } = await removeTrainingOfUser(_id);
+  res.json({ books, training });
 };
 
 module.exports = { check, add, remove };
