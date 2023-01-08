@@ -28,4 +28,10 @@ const remove = async (req, res) => {
   res.json({ books, training });
 };
 
-module.exports = { check, add, remove };
+const addResult = async (req, res) => {
+  const { _id } = req.user;
+  const { books, training } = await handleNewResult(_id, req.body);
+  res.json({ books, training });
+};
+
+module.exports = { check, add, remove, addResult };

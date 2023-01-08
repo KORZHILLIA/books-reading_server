@@ -28,4 +28,11 @@ router.post(
   createTryCatchWrapper(trainingControllers.remove)
 );
 
+router.post(
+  "/addresult",
+  validateBody(schemas.addNewResultSchema),
+  authenticate,
+  createTryCatchWrapper(trainingControllers.addResult)
+);
+
 module.exports = router;

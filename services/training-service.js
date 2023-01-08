@@ -45,4 +45,30 @@ const removeTrainingOfUser = async (userId) => {
   return updatedUser;
 };
 
-module.exports = { checkTraining, addTrainingToUser, removeTrainingOfUser };
+const handleNewResult = async (userId, newResult) => {
+  const { bookId } = newResult;
+  const user = await User.findById(userId);
+  const { results } = await Training.findByIdAndUpdate(
+    user.training,
+    {
+      $push: { results: newResult },
+    },
+    { new: true }
+  );
+  const totalPagesRead = results
+    .filter((result) => result.bookId === bookId)
+    .reduce((acc, { pages }) => acc + pages, 0);
+  const book = await Book.findById(bookId);
+  if (book.pages <= totalPagesRead) {
+    await Book.findByIdAndUpdate(bookId, { status: "past" });
+  }
+  const updatedUser = await User.findById(userId).populate("books");
+  return updatedUser;
+};
+
+module.exports = {
+  checkTraining,
+  addTrainingToUser,
+  removeTrainingOfUser,
+  handleNewResult,
+};

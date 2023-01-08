@@ -18,7 +18,7 @@ const trainingSchema = new Schema(
     books: [{ type: Schema.Types.ObjectId, ref: "Book" }],
     results: [
       {
-        id: String,
+        bookId: String,
         date: String,
         pages: Number,
       },
@@ -34,7 +34,7 @@ const addNewTrainingSchema = Joi.object({
 });
 
 const addNewResultSchema = Joi.object({
-  id: Joi.string().required(),
+  bookId: Joi.string().required(),
   date: Joi.string().required(),
   pages: Joi.number().required(),
 });
