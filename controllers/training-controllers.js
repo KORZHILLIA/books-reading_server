@@ -31,8 +31,8 @@ const remove = async (req, res) => {
 
 const addResult = async (req, res) => {
   const { _id } = req.user;
-  const { books, training } = await handleNewResult(_id, req.body);
-  res.json({ books, training });
+  const training = await handleNewResult(_id, req.body);
+  res.json({ training });
 };
 
 module.exports = { check, add, remove, addResult };
