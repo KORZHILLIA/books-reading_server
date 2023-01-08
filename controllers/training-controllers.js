@@ -3,6 +3,7 @@ const {
   checkTraining,
   addTrainingToUser,
   removeTrainingOfUser,
+  handleNewResult,
 } = require("../services/training-service");
 
 const check = async (req, res) => {
