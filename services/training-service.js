@@ -10,7 +10,29 @@ const checkTraining = async (userId) => {
     const requiredTraining = await Training.findById(training).populate(
       "books"
     );
-    return requiredTraining;
+    const { books, results, finish } = requiredTraining;
+    const allBooksPages = books.reduce((acc, { pages }) => acc + pages, 0);
+    const allResultsPages = results.reduce((acc, { pages }) => acc + pages, 0);
+    const isReadingFinished = allResultsPages >= allBooksPages;
+    const isTrainingFinished =
+      new Date(finish).getTime() <= new Date().getTime();
+    if (isReadingFinished && !isTrainingFinished) {
+      const goodFinishedTraining = await Training.findByIdAndUpdate(
+        training,
+        { isFinished: true },
+        { new: true }
+      );
+      return goodFinishedTraining.populate("books");
+    } else if (!isReadingFinished && isTrainingFinished) {
+      const badFinishedTraining = await Training.findByIdAndUpdate(
+        training,
+        { isFinished: true },
+        { new: true }
+      );
+      return badFinishedTraining.populate("books");
+    } else {
+      return requiredTraining;
+    }
   }
 };
 

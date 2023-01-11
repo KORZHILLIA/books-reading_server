@@ -7,6 +7,10 @@ const trainingSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    isFinished: {
+      type: Boolean,
+      default: false,
+    },
     start: {
       type: String,
       default: "",
