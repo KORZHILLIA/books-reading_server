@@ -4,6 +4,7 @@ const {
   addBookToUser,
   changeBookStatus,
   removeBookFromUser,
+  changeBookResume,
 } = require("../services/book-service");
 
 const getAll = async (req, res) => {
@@ -40,4 +41,19 @@ const remove = async (req, res) => {
   res.json({ books });
 };
 
-module.exports = { getAll, add, relocateToPresent, relocateToFuture, remove };
+const changeResume = async (req, res) => {
+  const { _id } = req.user;
+  const { bookId } = req.params;
+  const { rating, resume } = req.body;
+  const { books } = await changeBookResume(_id, bookId, rating, resume);
+  res.json({ books });
+};
+
+module.exports = {
+  getAll,
+  add,
+  relocateToPresent,
+  relocateToFuture,
+  remove,
+  changeResume,
+};

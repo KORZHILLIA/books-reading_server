@@ -40,4 +40,11 @@ router.delete(
   createTryCatchWrapper(bookControllers.remove)
 );
 
+router.patch(
+  "/resume/:bookId",
+  validateBody(schemas.addNewResumeSchema),
+  authenticate,
+  createTryCatchWrapper(bookControllers.changeResume)
+);
+
 module.exports = router;
