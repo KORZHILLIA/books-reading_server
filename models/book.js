@@ -51,7 +51,7 @@ const addNewBookSchema = Joi.object({
 
 const addNewResumeSchema = Joi.object({
   rating: Joi.number().min(1).max(5).required(),
-  resume: Joi.string().max(500),
+  resume: Joi.string().min(0).max(500),
 });
 
 const Book = model("Book", bookSchema);
