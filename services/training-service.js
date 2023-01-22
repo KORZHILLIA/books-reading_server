@@ -86,7 +86,7 @@ const handleNewResult = async (userId, newResult) => {
   }
   // const { training } = await User.findById(userId).populate("training");
   // return training.populate("books");
-  const training = checkTraining(userId);
+  const training = await checkTraining(userId);
   return training;
 };
 
