@@ -19,14 +19,14 @@ const checkTraining = async (userId) => {
     if (isReadingFinished && !isTrainingFinished) {
       const goodFinishedTraining = await Training.findByIdAndUpdate(
         training,
-        { isFinished: true },
+        { isFinished: true, isActive: false },
         { new: true }
       );
       return goodFinishedTraining.populate("books");
     } else if (!isReadingFinished && isTrainingFinished) {
       const badFinishedTraining = await Training.findByIdAndUpdate(
         training,
-        { isFinished: true },
+        { isFinished: true, isActive: false },
         { new: true }
       );
       return badFinishedTraining.populate("books");
