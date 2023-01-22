@@ -84,8 +84,10 @@ const handleNewResult = async (userId, newResult) => {
   if (book.pages <= totalPagesRead) {
     await Book.findByIdAndUpdate(bookId, { status: "past" });
   }
-  const { training } = await User.findById(userId).populate("training");
-  return training.populate("books");
+  // const { training } = await User.findById(userId).populate("training");
+  // return training.populate("books");
+  const training = checkTraining(userId);
+  return training;
 };
 
 module.exports = {
