@@ -35,4 +35,10 @@ router.post(
   createTryCatchWrapper(trainingControllers.addResult)
 );
 
+router.patch(
+  "/stop",
+  authenticate,
+  createTryCatchWrapper(trainingControllers.makeInactive)
+);
+
 module.exports = router;

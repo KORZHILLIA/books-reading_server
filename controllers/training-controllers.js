@@ -4,6 +4,7 @@ const {
   addTrainingToUser,
   removeTrainingOfUser,
   handleNewResult,
+  makeTrainingInactive,
 } = require("../services/training-service");
 
 const check = async (req, res) => {
@@ -35,4 +36,10 @@ const addResult = async (req, res) => {
   res.json({ training });
 };
 
-module.exports = { check, add, remove, addResult };
+const makeInactive = async (req, res) => {
+  const { _id } = req.user;
+  const training = await makeTrainingInactive(_id);
+  res.json({ training });
+};
+
+module.exports = { check, add, remove, addResult, makeInactive };
