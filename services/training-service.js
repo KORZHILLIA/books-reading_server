@@ -53,7 +53,6 @@ const removeTrainingOfUser = async (userId) => {
     const { status } = await Book.findById(id);
     if (status === "present") {
       await Book.findByIdAndUpdate(id, { status: "future" });
-      return;
     }
     if (status === "past") {
       await Book.findByIdAndDelete(id);
