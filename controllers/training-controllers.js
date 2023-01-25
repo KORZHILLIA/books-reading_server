@@ -26,8 +26,10 @@ const add = async (req, res) => {
 
 const remove = async (req, res) => {
   const { _id } = req.user;
-  const { books, training } = await removeTrainingOfUser(_id);
-  res.json({ books, training });
+  // const { books, training } = await removeTrainingOfUser(_id);
+  const { training } = await removeTrainingOfUser(_id);
+  // res.json({ books, training });
+  res.json({ training });
 };
 
 const addResult = async (req, res) => {

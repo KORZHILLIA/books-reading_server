@@ -62,7 +62,8 @@ const removeTrainingOfUser = async (userId) => {
     userId,
     { training: null },
     { new: true }
-  ).populate("books");
+  );
+  // ).populate("books");
   return updatedUser;
 };
 
