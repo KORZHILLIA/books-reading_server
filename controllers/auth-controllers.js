@@ -12,6 +12,7 @@ const {
   generateToken,
   sendMail,
 } = require("../helpers");
+const BASE_URL = "https://books-reading-one.vercel.app/";
 
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
@@ -30,7 +31,7 @@ const signup = async (req, res) => {
   const mail = {
     to: email,
     subject: "Books Reading signup confirmation",
-    html: `<a href="http://localhost:3000/api/auth/verify/${verificationToken}" target="_blank">Press to confirm registration</a>`,
+    html: `<a href="${BASE_URL}api/auth/verify/${verificationToken}" target="_blank">Press to confirm registration</a>`,
   };
   await sendMail(mail);
   res.status(201).json({
@@ -69,7 +70,7 @@ const resendVerifyEmail = async (req, res) => {
   const mail = {
     to: email,
     subject: "Books Reading signup conirmation",
-    html: `<a href="BASE_URL/api/auth/verify/${verificationToken}">Press to confirm registration</a>`,
+    html: `<a href="${BASE_URL}/api/auth/verify/${verificationToken}">Press to confirm registration</a>`,
   };
   await sendMail(mail);
   res.json({ message: "Verification email has been sent" });
